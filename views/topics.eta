@@ -1,0 +1,31 @@
+<% layout("./layouts/layout.eta") %>
+
+<div class="container position-relative" style="background-color: #d3dae6; height: 500px;">
+  <% if (it.user && it.user.admin) { %>
+    <% if (it.errors) { %>
+      <%~ includeFile("./partials/errors.eta", it) %>
+    <% }; %>
+    <form class="p-1" method="POST">
+      <input type="text" name="name" value="<%= it.errors ? it.name : "" %>" />
+      <input type="submit" value="add"/>
+    </form>
+  <% }; %>
+
+  <h1>Click on a topic to add or remove questions</h1>
+  <ul class="list-group overflow-auto" <% if (it.user.admin) { %> 
+    style="height: 390px;" 
+  <% } else { %> 
+    style="height: 432px;" 
+  <% } %>>
+  <% it.topics.forEach((topic) => { %>
+    <li class="list-group-item p-2">
+      <a href="/topics/<%= topic.id %>"><%= topic.name %></a>
+      <% if (it.user && it.user.admin) { %>
+        <form class="d-inline" method="POST" action="/topics/<%= topic.id%>/delete"> 
+          <input type="submit" value="delete"/>
+        </form>
+      <% }; %>
+    </li>
+  <% }); %>
+  </ul>
+</div>

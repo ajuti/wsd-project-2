@@ -1,0 +1,19 @@
+<% layout("./layouts/layout.eta") %>
+
+<div class="container position-relative" style="background-color: #d3dae6; height: 300px;">
+  <% if (!it.question) { %>
+    <h2 class="mx-auto p-1" style="width: fit-content;">No questions available yet</h2>
+  <% } else { %>
+    <h2 class="mx-auto p-1" style="width: fit-content;"><%= it.question.question_text %></h2><br/>
+    <ul class="list-group overflow-auto" style="height: 220px;">
+      <% it.options.forEach((opt) => { %>
+        <li class="list-group-item p-2">
+          <p class="d-inline" style="padding-right: 15px;"><%= opt.option_text %></p>
+          <form class="d-inline" method="POST" action="/quiz/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options/<%= opt.id %>">
+            <input class="btn btn-primary d-inline" type="submit" value="Choose"/>
+          </form>
+        </li>
+      <% }); %>
+    </ul>
+  <% }; %>
+</div>

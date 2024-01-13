@@ -1,0 +1,18 @@
+<% layout("./layouts/layout.eta") %>
+
+<div class="container position-relative">
+  <h1 class="mx-auto p-1" style="width: fit-content">Register</h1>
+
+  <% if (it.errors) { %>
+    <%~ includeFile("./partials/errors.eta", it) %>
+  <% }; %>
+  <div class="mx-auto p-1" style="width: fit-content">
+    <form  method="POST" >
+      <input type="email" name="email" value="<%= it.errors ? it.email : ""%>"/>
+      <input type="password" name="password" />
+      <input type="submit" value="register" />
+    </form>
+
+    <a href="/auth/login">Already registered? Login here.</a>
+  </div>
+</div>

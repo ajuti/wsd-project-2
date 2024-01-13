@@ -1,0 +1,19 @@
+<% layout("./layouts/layout.eta") %>
+
+<div class="container position-relative">
+  <h1 class="mx-auto p-1" style="width: fit-content">Login</h1>
+
+  <% if (it.errors) { %>
+    <div class="mx-auto p-1" style="width: fit-content; color: red;"><%= it.errors.error %></div>
+  <% }; %>
+
+  <div class="mx-auto p-1" style="width: fit-content">
+    <form method="POST" >
+      <input type="email" name="email" value="<%= it.errors ? it.email : ""%>"/>
+      <input type="password" name="password" />
+      <input type="submit" value="login" />
+    </form>
+
+    <a href="/auth/register">Not registered yet? Register here.</a>
+  </div>
+</div>

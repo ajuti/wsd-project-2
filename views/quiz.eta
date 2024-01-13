@@ -1,0 +1,14 @@
+<% layout("./layouts/layout.eta") %>
+
+<div class="container position-relative" style="background-color: #d3dae6; height: 500px;">
+  <h1>Click on a topic to start quizzing</h1>
+  <% if (it.topics) { %>
+    <ul class="list-group overflow-auto">
+      <% it.topics.forEach((topic) => { %>
+        <li class="list-group-item p-2"><a href="/quiz/<%= topic.id%>"><%= topic.name %></a></li>
+      <% });%>
+    </ul>
+  <% } else { %>
+    <p>No topics yet</p>
+  <% }; %>
+</div>
