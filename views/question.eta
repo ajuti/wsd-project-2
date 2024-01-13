@@ -11,7 +11,7 @@
   <% if (it.errors) { %>
     <%~ includeFile("./partials/errors.eta", it)%>
   <% }; %>
-  <form method="POST">
+  <form method="POST" action="/topics/<%= it.topic.id %>/questions/<%= it.question.id %>/options">
     <input type="text" name="option_text" value="<%= it.errors ? it.option_text : "" %>" />
     <input type="checkbox" name="is_correct" value="<%= it.errors ? it.is_correct : "" %>" />
     <input type="submit" value="submit option"/>

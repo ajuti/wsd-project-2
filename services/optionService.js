@@ -18,7 +18,7 @@ const getOptionById = async(oId) => {
 };
 
 const getCorrectByQid = async(qId) => {
-  return (await sql`SELECT * FROM question_answer_options WHERE question_id=${qId} AND is_correct=true`)[0];
+  return (await sql`SELECT * FROM question_answer_options WHERE question_id=${qId} AND is_correct=true`);
 };
 
 const getOptionsForIdApi = async(qId) => {

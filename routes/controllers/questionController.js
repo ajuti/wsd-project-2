@@ -53,7 +53,7 @@ const showQuestionById = async({params, render}) => {
 
   const question = await questionService.getQuestionById(questionId);
   const options = await optionService.getOptionsForId(questionId);
-  const topic = await topicService.getTopicById(params.id);
+  const topic = await topicService.getTopicById(params.tId);
 
   render("question.eta", {question: question, options: options, topic: topic})
 };

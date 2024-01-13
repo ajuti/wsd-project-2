@@ -31,16 +31,33 @@ const showQuestion = async ({render, params}) => {
   render("quizQuestion.eta", {question: question, options: options});
 };
 
-const submitOption = async({render, params, user}) => {
+const submitOption = async({response, params, user}) => {
   const qId = params.qId;
   const oId = params.oId;
   const uId = user.id;
 
   await quizService.saveAnswer(uId, qId, oId);
   const chosen = await optionService.getOptionById(oId);
-  const correct = await optionService.getCorrectByQid(qId);
   
-  render("answer.eta", {chosen: chosen, correct: correct, tId: params.tId});
+  if (chosen.is_correct) {
+    response.redirect(`/quiz/${params.tId}/questions/${qId}/correct`)
+  } else {
+    response.redirect(`/quiz/${params.tId}/questions/${qId}/incorrect`)
+  }
 };
 
-export { showQuiz, showTopic, showQuestion, submitOption };
+const showAnswer = async({render, request, params}) => {
+if (request.url.pathname.endsWith('/correct')) {
+    console.log(params);
+    render('correct.eta', { tId: params.tId });
+  } else if (request.url.pathname.endsWith('/incorrect')) {
+    const data = {
+      tId: params.tId,
+      correctOptions: await optionService.getCorrectByQid(params.qId)
+    };
+    console.log(data);
+    render('incorrect.eta', data);
+  }
+};
+
+export { showQuiz, showTopic, showQuestion, submitOption, showAnswer };

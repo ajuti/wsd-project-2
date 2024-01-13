@@ -16,10 +16,10 @@ router.post("/topics/:id/delete", topicController.deleteTopic);
 router.get("/topics/:id", topicController.showTopicById);
 
 router.post("/topics/:id/questions", questionController.addQuestion);
-router.get("/topics/:id/questions/:qId", questionController.showQuestionById);
+router.get("/topics/:tId/questions/:qId", questionController.showQuestionById);
 router.post("/topics/:tId/questions/:qId/delete", questionController.deleteQuestion);
 
-router.post("/topics/:id/questions/:qId", optionController.addOption);
+router.post("/topics/:tId/questions/:qId/options", optionController.addOption);
 router.post("/topics/:tId/questions/:qId/options/:oId/delete", optionController.deleteOption);
 
 router.get("/auth/register", authController.showRegistration);
@@ -33,6 +33,8 @@ router.get("/auth/logout", authController.logout);
 router.get("/quiz", quizController.showQuiz);
 router.get("/quiz/:tId", quizController.showTopic);
 router.get("/quiz/:tId/questions/:qId", quizController.showQuestion);
+router.get("/quiz/:tId/questions/:qId/correct", quizController.showAnswer);
+router.get("/quiz/:tId/questions/:qId/incorrect", quizController.showAnswer);
 router.post("/quiz/:tId/questions/:qId/options/:oId", quizController.submitOption);
 
 router.get("/api/questions/random", quizApi.getRandom);

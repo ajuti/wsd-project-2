@@ -1,0 +1,12 @@
+<% layout("./layouts/layout.eta") %>
+
+<div class="container position-relative" style="background-color: #d3dae6; height: 300px;">
+    <p style="font-size: 3rem;">Incorrect!</p><br/>
+    <% if (it.correctOptions) { %>
+      <% it.correctOptions.forEach((option) => { %>
+        <p>The correct option was <span class="font-italic"><%= option.option_text %></span></p>
+      <% }); %>
+    <% }; %>
+
+  <a class="btn btn-secondary" style="position: absolute; bottom: 15px; left: 15px;" href="/quiz/<%= it.tId %>/">Next question</a>
+</div>
